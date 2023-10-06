@@ -22,7 +22,7 @@ export class HeroDetailComponent {
   ngOnInit(): void {
     this.getHero();
   }
-  
+
   goBack(): void {
     this.location.back();
   }
@@ -31,5 +31,12 @@ export class HeroDetailComponent {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.heroService.getHero(id)
       .subscribe(hero => this.hero = hero);
+  }
+
+  save(): void {
+    if (this.hero) {
+      this.heroService.updateHero(this.hero)
+        .subscribe(() => this.goBack());
+    }
   }
 }
